@@ -1,0 +1,30 @@
+{% extends "registration/base_auth.html" %}
+{% block content %}
+<div class="container" style="width: 240px;">
+	<br>
+	<form method="POST">{% csrf_token %}
+		{% if form %}
+		{% for field in form %}
+		<label for = '{{ field.name }}'>{{ field.label }}</label>
+		{{ field }}
+
+		{% endfor %}
+		{% endif %}
+
+		{% if user_form %}
+		{% for field in user_form %}
+		<label>{{ field.label }}</label>	
+		{{ field }}
+		{% endfor %}
+		{% endif %}
+		{% if user_form.password2.errors %}
+		<div class="form-group">
+			<h6 class="text-danger">{{user_form.password2.errors.as_text}}</h6>
+		</div>
+		{% endif %}
+
+		<br/>
+		<input id="button" type="submit" class="btn btn-outline-success " style="width: 100%" value="Сохранить">
+	</form>
+</div>
+{% endblock %}
